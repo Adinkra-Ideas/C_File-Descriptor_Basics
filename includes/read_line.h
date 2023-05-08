@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   read_line.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: euyi <euyi@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 04:54:09 by euyi              #+#    #+#             */
-/*   Updated: 2022/01/10 19:52:12 by euyi             ###   ########.fr       */
+/*   Created: 2021/11/09 01:25:21 by euyi              #+#    #+#             */
+/*   Updated: 2023/05/09 01:25:58 by euyi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef __READ_LINE__H
+# define __READ_LINE__H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE (20)
 # endif
 
-# include <unistd.h>
-# include <stdlib.h>
+# define MAX_FILE_SIZE 100000001
+# define MAX_LINE_LEN 50000001
 
-char	*get_next_line(int fd);
-char	*eu_free(char **ptr);
-char	*eu_malloc(char **ptr, char **cpy, int *flag);
-void	eu_memcpy(char *dest, const char *src, size_t n);
-int		count_n(char *ptr);
-int		check_for_n(char **ptr, char **cpy, int *flagforloop);
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+
+int 	check_for_n(char *ptr);
+char 	*copy_one_line(char *dest, char **index);
+void	shift_index(char **src, int *nptr);
+char    *get_next_line(int fd);
+void 	exit_with_error( const char *msg );
 
 #endif
